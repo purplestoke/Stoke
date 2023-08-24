@@ -20,8 +20,50 @@ Stoke.Guilds() -----------------------------------------------------------------
 
   pullChannel(_id, find)
 
-    Takes arg of Discord guild id and find, find determines what channel id we are looking for.
+    Takes arg of Discord guild id and find, find determines what channel id we are looking for
     EX. 
       channelId = Stoke.Guilds().pullChannel(guildId, find='playerProfile')
 
     Returns the channel id as an Integer 
+
+  pullName(_id)
+
+    Takes arg of guild Id and pulls the Server name 
+    Returns Server name as a String 
+
+  pullId(_id)
+
+    Takes arg of guild Id and pulls the bugs id of that server
+    Returns as a String
+
+  pullScore(_id)
+
+    Takes are of guild Id and pulls the Server's score in an Event
+
+  pullRole(_id, find)
+
+    Takes are of guild Id and find 
+    find is used to find what role you are looking for 
+    EX.
+      role = Stoke.Guilds().pullRole(guildId, find='apex')
+
+Stoke.PlayerProfile() -----------------------------------------------------------------------------------
+
+  create(discord, gamertag, guildId, type)
+
+    Takes args;
+      discord = discord username
+      gamertag = user gamertag
+      guildId = Discord guild Id
+      type = what type of profile
+
+    Creates a player profile which is connected to their bugs profile 
+
+  delete(discord, guildId, type)
+
+    Takes args;
+      discord = Discord username
+      guildId = Discord guild id
+      type = what type of player profile 
+
+    Deletes a player profile
