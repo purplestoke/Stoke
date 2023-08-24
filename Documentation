@@ -1,0 +1,27 @@
+Stoke
+Stoke.bugsProfile()
+Stoke.Guilds()
+Stoke.PlayerProfile()
+
+FLAGS
+1 = Method Error
+2 = Success
+3 = Database Error 
+4 = Arg Error 
+
+Stoke.bugsProfile() -----------------------------------------------------------------------------------
+
+  hasProfile(_discord) 
+
+    Takes argument of the users discord and verifies that the user has created a bugs Profile
+    If profile found returns flag 2
+
+Stoke.Guilds() -----------------------------------------------------------------------------------
+
+  pullChannel(_id, find)
+
+    Takes arg of Discord guild id and find, find determines what channel id we are looking for.
+    EX. 
+      channelId = Stoke.Guilds().pullChannel(guildId, find='playerProfile')
+
+    Returns the channel id as an Integer 
