@@ -59,11 +59,14 @@ Stoke.PlayerProfile() ----------------------------------------------------------
 
     Creates a player profile which is connected to their bugs profile 
 
-  delete(discord, guildId, type)
+  delete(discord, type)
 
     Takes args;
       discord = Discord username
-      guildId = Discord guild id
       type = what type of player profile 
 
     Deletes a player profile
+
+  retrieve(discord, type)
+
+    Takes args of the discord username and type of profile to retrieve
