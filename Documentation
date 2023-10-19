@@ -1,3 +1,16 @@
+This Documentation describes the Methods used in the Stoke.py Class Object. Stoke is a Discord bot which hosts online gaming events
+using the Ethereum blockchain. Stoke does not write anything to the blockchain, the bot merely queries the blockchain in order
+to verify payments made to the bugs Wallets. By doing so Stoke can identify individuals over the internet without the need for
+identifying information. 
+
+Stoke reads and writes from a SQL database which holds all public information needed to create a bugs and player profiles.
+This includes your; Discord id, Eth address and gamertag
+
+Other information in the Database is; tx hashes, guild ids, role ids, channel ids, event flags, payment flags, rate tables 
+
+As a result of this structure all a user needs in order to compete in bugs Events is an Eth wallet (Non-Hosted) 
+and Discord account.
+
 Class Object: Stoke
 
 Method:
