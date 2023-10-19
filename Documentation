@@ -69,12 +69,12 @@ Stoke.bugsProfile() ------------------------------------------------------------
   The bugsProfile() method leads to more methods which allow for the ability to create, delete, 
   retrieve, or validate a bugs Profile. Another sub-method allows for the retrieval of a bugs Id.  
 
-  .hasProfile(_discord) 
+  .hasProfile(_discord) ----------
 
     Takes argument of the users discord id and verifies that the user has created a bugs Profile
     If profile found the method returns a Flag of 2, Else a Flag of 1 is returned
 
-  .create(_discord, _ethAddr)
+  .create(_discord, _ethAddr) ----------
 
     Takes argument(s) of the users Discord id and and input of the users Eth Address. This method makes
     an Etherscan API call and searches for a 0.005 ETH transaction made to the bugs Treasury Wallet. The params 
@@ -87,17 +87,17 @@ Stoke.bugsProfile() ------------------------------------------------------------
     If a flag of 5 is returned it means that duplicate information is attempting to be inserted into the database.
     Either the Eth address has already been used, or the Discord account already has a profile. 
 
-  .delete(_discord, _guildId)
+  .delete(_discord, _guildId) ----------
 
     Takes argument(s) of the users Discord id and their guildId (While writing this I found an Error with using the
     guildId as a param, while finish this section once the error is fixed.) 
 
-  .retrieve(_discord)
+  .retrieve(_discord) ----------
 
     Takes the argument of the users Discord id. And queries the bugs Database for the Eth address associated.
     Returns a Flag of 2 and the Ethereum Address. If Error returns a Flag of 3. 
 
-  .update(_discord, _ethAddr)
+  .update(_discord, _ethAddr) ----------
 
     Takes the argument(s) of the users Discord id and the New Etheruem address they want to now use for their
     bugs Profile. This method makes an Etherscan API call using the new address and searches for a Eth tx of 
@@ -106,62 +106,141 @@ Stoke.bugsProfile() ------------------------------------------------------------
 
     A flag of 5 is returned if the Eth address is already found in the database. 
 
-  .bugsId(_discord)
+  .bugsId(_discord) ----------
 
     Takes the argument of the users Discord id. Uses that id and queries the bugs Database for the users bugsId.
     Returns a Flag of 2 and the users bugsId if executed properly. Otherwise a Flag of 3 and a bugsId of None is returned.  
 
 Stoke.Guilds() -----------------------------------------------------------------------------------
+  The Stoke.Guilds() method leads to a group of methods for pulling guild information such as channel ids, role ids,
+  community scores in events etc. 
 
-  pullChannel(_id, find)
+  .pullChannel(_id, _find) ----------
 
-    Takes arg of Discord guild id and find, find determines what channel id we are looking for
-    EX. 
-      channelId = Stoke.Guilds().pullChannel(guildId, find='playerProfile')
+    Takes the argument(s) of _id and find. "find" is a string of a Discord Channel created by the Stoke bot.
+    This arg filters which channel id Stoke will pull from the database. The _id arg is the guild id where this method
+    takes place. So that channels within that specific guild are pulled. 
 
-    Returns the channel id as an Integer 
+    If successful the method returns the channel id and a Flag of 2. 
+    A Flag of 3 means there was an error with the SQL query.
 
-  pullName(_id)
+  .pullName(_id) ----------
 
     Takes arg of guild Id and pulls the Server name 
-    Returns Server name as a String 
+    Returns Server name as a String
+    If unsuccessful returns a Flag of 3
 
-  pullId(_id)
+  .pullId(_id) ----------
 
     Takes arg of guild Id and pulls the bugs id of that server
-    Returns as a String
+    Returns as a Integer
+    If unsuccessful returns a Flag of 3
 
-  pullScore(_id)
+  .pullScore(_id) ----------
 
-    Takes are of guild Id and pulls the Server's score in an Event
+    Takes arg of guild Id and pulls the Server's score in an Event
+    Returns score
+    If unsuccessful returns a Flag of 3
 
-  pullRole(_id, find)
+  .pullRole(_guildId, _find) ----------
 
-    Takes are of guild Id and find 
-    find is used to find what role you are looking for 
-    EX.
-      role = Stoke.Guilds().pullRole(guildId, find='apex')
+    Takes argument(s) of guildId and find. This method returns the role id for a bugs role within the server specified
+    by the guild id. Find is a string of the role for which we want to get the role id. 
+    Returns a Flag of 2 and the role id.
+    If unsuccessfull returns a Flag of 3 and a empty string.
+    If a flag of 4 is returned then something went wrong with the "find" param.  
 
 Stoke.PlayerProfile() -----------------------------------------------------------------------------------
+  The Stoke.PlayerProfile() method leads to a group of methods for creating, deleting, and retrieving a
+  player profile. 
 
-  create(discord, gamertag, guildId, type)
+  .create(_discord, _gamertag, _guildId, _type)
 
-    Takes args;
-      discord = discord username
-      gamertag = user gamertag
-      guildId = Discord guild Id
-      type = what type of profile
+    Takes argument(s) discord, gamertag, guildId, type
+      _discord      discord id
+      _gamertag     input by user (integrity check implemented)
+      _guildId      guild in which the command is executed
+      _type         what game is Stoke making a player profile for (As of 10/19/23 Apex and XDefiant)
 
-    Creates a player profile which is connected to their bugs profile 
+    This method creates a player profile. A player profile is linked to a users bugs Profile. Users of bugs can create
+    a player profile for each game bugs supports. These profiles contain the users gamertag and the Discord server/community
+    they will represent in the game. The community a user represents is dependent on which Discord Server the user creates a
+    player profile. 
 
-  delete(discord, type)
+    If successful this method will return a Flag of 2
+    A Flag of 3 means either 
+    the user does not have a bugs Profile or 
+    an error occured when attempting to fetch the users bugs id or
+    an error occured when attempting to pull the Servers guild id 
+    A Flag of 4 means an issues with the "_type" param
+    A Flag of 5 means a duplicate gamertag is attempting to be used
+    
+  .delete(_discord, _type)
 
-    Takes args;
-      discord = Discord username
-      type = what type of player profile 
+    Takes argument(s) of the users Discord id and which player profile they are deleting (As of 10/19/23 Apex or XDef)
+    Deletes a users player profile not their bugs profile. 
 
-    Deletes a player profile
+    If successful returns a Flag of 2
+    Flag 3 means error when inserting None into Database
+    Flag 4 means _type error 
 
-  retrieve(discord, type)
+  .retrieve(_discord, _type)
 
-    Takes args of the discord username and type of profile to retrieve
+    Takes argument(s) of the users discord id and the type of profile they are retrieving (Apex or Xdef). Pulls users
+    gamertag for that player profile. 
+
+    If successfull returns a Flag of 2 and the users gamertag
+    Flag 3 means an error occured when retrieving the information
+    Flag 4 means _type error
+
+Stoke.Event() -----------------------------------------------------------------------------------
+  The Stoke.Event() method leads to a group of methods for changing event flags, checking submissions, and
+  deleting submissions. 
+
+  .isOn(_event) ----------
+
+    Takes argument of _event. This method is used to check if an event is active.
+    If successful returns the event flag and a Flag of 2, otherwise returns an event flag of None and Flag 3. 
+
+  .submissionDelete(_discord, _event) ----------
+
+    Takes argument(s) of the users Discord id and the event which Stoke will delete a submission for. 
+    Success returns a Flag 2 not success returns a Flag 3 a Flag of 1 means _event error.
+
+  .submissionCheck(_discord, _event) ----------
+
+    Takes argument(s) of the users Discord id and the event Stoke is checking a submission for.
+    If successful returns the submission and a Flag of 2. Flag 1 means _event error. 
+
+  .eventFlag(_game, _flag) ----------
+
+    Takes argument(s) of the game and the flag. These params are used to set the flag for the specified game.
+    If successful returns a Flag of 2. Flag of 3 means an error setting the flag. 
+
+  .pmntFlag(_game, _flag) ----------
+
+    Takes argument(s) of game and flag. This method sets the payment flag which allows the Stoke bot to verify payments
+    for events. If flag is set to 0 Stoke will not verify payments for the game in which the flag is off.
+
+  .pmntOn(_event) ----------
+
+    Takes argument of event which is the game we are querying to see if the payment flag is on or off. 
+
+    If successfull returns the payment flag and a Flag of 2. Flag 3 means an error fetching the flag. 
+
+Stoke.PrivateEvent() -----------------------------------------------------------------------------------
+  The Stoke.PrivateEvent() method leads to a group of methods used by Stoke to generate private events for
+  winning communities of bugs events. 
+
+  .competitorList() ----------
+
+    Pulls the competitor list of those elligible to compete in the private event.
+
+    If successful returns a list of competitors and a Flag 2. Flag 3 means there was an error pulling the list. 
+
+  .PrivEventDraw(_event) ----------
+
+    Takes argument of _event, different draw methods are used for different events. 
+
+    If successfull returns the winning players of the event and a Flag 2. Flag 3 means Error. 
+
