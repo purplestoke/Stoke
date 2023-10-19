@@ -1,20 +1,115 @@
-Stoke
+Class Object: Stoke
+
+Method:
+  SubMethod:
+
 Stoke.bugsProfile()
+  .hasProfile()
+  .create()
+  .delete()
+  .retrieve()
+  .update()
+  .bugsId()
+
 Stoke.Guilds()
+  .pullChannel()
+  .pullName()
+  .pullId()
+  .pullScore()
+  .pullRole()
+
 Stoke.PlayerProfile()
+  .create()
+  .delete()
+  .retrieve()
+
+Stoke.Event()
+  .isOn()
+  .submissionDelete()
+  .checkSubmission()
+  .eventFlag()
+  .pmntFlag()
+  .pmntOn()
+
+Stoke.PrivateEvent()
+  .competitorList()
+  .privEventDraw()
+
+Stoke.PaymentVerify()
+  .pullAddr()
+  .checkPayment()
+
+Stoke.Wipe()
+  .wipeEvent()
+
+Stoke.Wallet()
+  .pullBal()
+
+Stoke.Rate()
+  .rateCheck()
+  .resetRate()
+
+Stoke.Log()
+  .log()
+  .setupLog()
+  .leaveLog()
+  .wipeLog()
+  .privEventLog()
 
 FLAGS
+Flags are spit out from methods of the Stoke Class object. These Flags are recorded in the Logs directory. 
+A Flag of 3 is most likely an SQL Error, however it could also be an error of some other library used by Stoke. 
+
 1 = Method Error
 2 = Success
 3 = Database Error 
 4 = Arg Error 
 
 Stoke.bugsProfile() -----------------------------------------------------------------------------------
+  The bugsProfile() method leads to more methods which allow for the ability to create, delete, 
+  retrieve, or validate a bugs Profile. Another sub-method allows for the retrieval of a bugs Id.  
 
-  hasProfile(_discord) 
+  .hasProfile(_discord) 
 
-    Takes argument of the users discord and verifies that the user has created a bugs Profile
-    If profile found returns flag 2
+    Takes argument of the users discord id and verifies that the user has created a bugs Profile
+    If profile found the method returns a Flag of 2, Else a Flag of 1 is returned
+
+  .create(_discord, _ethAddr)
+
+    Takes argument(s) of the users Discord id and and input of the users Eth Address. This method makes
+    an Etherscan API call and searches for a 0.005 ETH transaction made to the bugs Treasury Wallet. The params 
+    used for the query is the range of blocks from, the first block generated at 12:00 AM + 5270 blocks.
+    If the payment is made within that period and this method is called within that period the transaction
+    will be verified.
+
+    This method returns a flag of 2 if the profile is created. This inserts the users Discord Id, Eth address,
+    and the Tx hash into the bugs Database.
+    If a flag of 5 is returned it means that duplicate information is attempting to be inserted into the database.
+    Either the Eth address has already been used, or the Discord account already has a profile. 
+
+  .delete(_discord, _guildId)
+
+    Takes argument(s) of the users Discord id and their guildId (While writing this I found an Error with using the
+    guildId as a param, while finish this section once the error is fixed.) 
+
+  .retrieve(_discord)
+
+    Takes the argument of the users Discord id. And queries the bugs Database for the Eth address associated.
+    Returns a Flag of 2 and the Ethereum Address. If Error returns a Flag of 3. 
+
+  .update(_discord, _ethAddr)
+
+    Takes the argument(s) of the users Discord id and the New Etheruem address they want to now use for their
+    bugs Profile. This method makes an Etherscan API call using the new address and searches for a Eth tx of 
+    0.003 ETH to the bugs Treasury wallet within the first Block generated that day at 12:00 AM + 5270 blocks.
+    If the payment is sent and the method is called within that range of blocks the method will return a Flag of 2.
+
+    A flag of 5 is returned if the Eth address is already found in the database. 
+
+  .bugsId(_discord)
+
+    Takes the argument of the users Discord id. Uses that id and queries the bugs Database for the users bugsId.
+    Returns a Flag of 2 and the users bugsId if executed properly. Otherwise a Flag of 3 and a bugsId of None is returned.  
 
 Stoke.Guilds() -----------------------------------------------------------------------------------
 
