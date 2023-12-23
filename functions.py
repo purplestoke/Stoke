@@ -1,30 +1,24 @@
 import requests
-import keyring
 from API_Tokens import *
 import random
 from datetime import datetime, time
-import time
 import sqlite3
 import math
+import pytz
 
-
+ 
 class Functions:
-    # KEYRING
-    def set_password(service, username, password):
-        keyring.set_password(service, username, password)
-        print("Password set successfully.")
-        return
-
     # GET BLOCK NUMS FOR BUGS PROFILE
     def getBlockNums():
         endpoint = "https://api.etherscan.io/api"
-        current_time = time.localtime()
-        current_time = current_time[:3] + (10, 0, 0) + current_time[6:]
-        timestamp = int(time.mktime(current_time))
+        current_time = datetime.utcnow()
+        startOfDay = datetime.combine(current_time.date(), time.min)
+        ethTimezone = pytz.timezone('UTC')
+        startOfDayEth = ethTimezone.localize(startOfDay)
+        timestamp = int(startOfDayEth.timestamp())
         url = f"{endpoint}?module=block&action=getblocknobytime&timestamp={timestamp}&closest=before&apikey={ETHSCAN_API_KEY}"
         response = requests.get(url)
         data = response.json()
-        # print(data)
         if data["status"] == "1":
             block_number = int(data["result"])
             _startBlock = block_number
@@ -33,6 +27,32 @@ class Functions:
             return _startBlock, _endBlock
         else:
             raise Exception("Failed to retrieve most recent block number")
+
+    # APEX PLACEMENT SORTING
+    def ApexPlacement(placed):
+        if int(placed) > 10:
+            points = 0
+        elif int(placed) == 10:
+            points = 3
+        elif int(placed) == 9:
+            points = 4
+        elif int(placed) == 8:
+            points = 5
+        elif int(placed) == 7:
+            points = 6
+        elif int(placed) == 6:
+            points = 7
+        elif int(placed) == 5:
+            points = 10
+        elif int(placed) == 4:
+            points = 12
+        elif int(placed) == 3:
+            points = 15
+        elif int(placed) == 2:
+            points = 20
+        elif int(placed) == 1:
+            points = 25
+        return points
 
     # CREATING THE RAFFLE DRAW FUCNTION
     def raffle_draw(participants: dict, competitorNum) -> str:
@@ -224,3 +244,30 @@ class Functions:
             del selected_players[winner]
 
         return winners
+
+        # APEX PLACEMENT SORTING
+
+    def ApexPlacement(placed):
+        if int(placed) > 10:
+            points = 0
+        elif int(placed) == 10:
+            points = 3
+        elif int(placed) == 9:
+            points = 4
+        elif int(placed) == 8:
+            points = 5
+        elif int(placed) == 7:
+            points = 6
+        elif int(placed) == 6:
+            points = 7
+        elif int(placed) == 5:
+            points = 10
+        elif int(placed) == 4:
+            points = 12
+        elif int(placed) == 3:
+            points = 15
+        elif int(placed) == 2:
+            points = 20
+        elif int(placed) == 1:
+            points = 25
+        return points
