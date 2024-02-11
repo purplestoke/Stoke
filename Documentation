@@ -1,12 +1,12 @@
 This Documentation describes the Methods used in the Stoke.py Class Object. Stoke is a Discord bot which hosts online gaming events
-using the Ethereum blockchain. Stoke does not write anything to the blockchain, the bot merely queries the blockchain in order
+using the Ethereum blockchain. Stoke does not write anything to the blockchain, the bot only queries the blockchain in order
 to verify payments made to the bugs Wallets. By doing so Stoke can identify individuals over the internet without the need for
 identifying information. 
 
 Stoke reads and writes from a SQL database which holds all public information needed to create a bugs and player profiles.
-This includes your; Discord id, Eth address and gamertag
+This includes a users; Discord id, Eth address and gamertag
 
-Other information in the Database is; tx hashes, guild ids, role ids, channel ids, event flags, payment flags, rate tables 
+Other information in the Database is; tx hashes, guild ids, role ids, channel ids, event flags, payment flags, rate tables
 
 As a result of this structure all a user needs in order to compete in bugs Events is an Eth wallet (Non-Hosted) 
 and Discord account.
@@ -90,8 +90,8 @@ Stoke.bugsProfile() ------------------------------------------------------------
   .create(_discord, _ethAddr) ----------
 
     Takes argument(s) of the users Discord id and and input of the users Eth Address. This method makes
-    an Etherscan API call and searches for a 0.005 ETH transaction made to the bugs Treasury Wallet. The params 
-    used for the query is the range of blocks from, the first block generated at 12:00 AM + 5270 blocks.
+    an Etherscan API call and searches for a 0.003 ETH transaction made to the bugs Treasury Wallet. The params 
+    used for the query is the range of blocks from, the first block generated at 12:00 AM + 8500 blocks.
     If the payment is made within that period and this method is called within that period the transaction
     will be verified.
 
