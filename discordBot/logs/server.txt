@@ -1,0 +1,4 @@
+Time: 2023-11-08 16:48:17.590601 | Guild: 1 | User: 5 | Cmd: apexReader | Flags: [2, 2]
+Time: 2023-11-08 16:49:18.087463 | Guild: 1 | User: 5 | Cmd: apexReader | Flags: [2, 2]
+Time: 2023-11-09 11:00:55.132973 | Guild: 1058918601987469404 | User: 5 | Cmd: apexReader | Flags: [2, 2]
+ 

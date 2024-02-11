@@ -1,0 +1,10 @@
+
+Time: 2023-09-08 19:21:21.159732 | User: 1 | Cmd: Averify | Flags: [2, 2, 2, 2, 3]
+Time: 2023-09-08 19:22:47.618249 | User: 1 | Cmd: Averify | Flags: [2, 2, 2, 2, 2]
+Time: 2023-09-08 19:22:54.989993 | User: 1 | Cmd: Averify | Flags: [2, 2, 2, 2, 2]
+Time: 2023-09-08 20:01:32.693066 | User: 2 | Cmd: Averify | Flags: [2, 2, 2, 2, 2]
+Time: 2023-09-08 20:04:18.755676 | User: 2 | Cmd: Averify | Flags: [2, 2, 2, 2, 2]
+Time: 2023-09-28 11:18:18.118126 | Guild: 1058918601987469404 | User: 1 | Cmd: Averify | Flags: [2, 2, 3]
+Time: 2023-10-31 14:05:58.288838 | Guild: 1058918601987469404 | User: 5 | Cmd: Averify | Flags: [2, 2, 2]
+Time: 2023-10-31 14:07:35.071687 | Guild: 1058918601987469404 | User: 5 | Cmd: Averify | Flags: [2, 2, 2]Time: 2023-10-31 14:16:37.667075 | Guild: 1058918601987469404 | User: 5 | Cmd: Averify | Flags: [2, 2, 2, 2, 3]
+Time: 2023-10-31 14:17:26.573292 | Guild: 1058918601987469404 | User: 5 | Cmd: Averify | Flags: [2, 2, 2, 2, 2]
