@@ -9,11 +9,6 @@ import math
 
 
 class Functions:
-    # KEYRING
-    def set_password(service, username, password):
-        keyring.set_password(service, username, password)
-        print("Password set successfully.")
-        return
 
     # GET BLOCK NUMS FOR BUGS PROFILE
     def getBlockNums():
@@ -250,30 +245,3 @@ class Functions:
             del selected_players[winner]
 
         return winners
-
-        # APEX PLACEMENT SORTING
-
-    def ApexPlacement(placed):
-        if int(placed) > 10:
-            points = 0
-        elif int(placed) == 10:
-            points = 3
-        elif int(placed) == 9:
-            points = 4
-        elif int(placed) == 8:
-            points = 5
-        elif int(placed) == 7:
-            points = 6
-        elif int(placed) == 6:
-            points = 7
-        elif int(placed) == 5:
-            points = 10
-        elif int(placed) == 4:
-            points = 12
-        elif int(placed) == 3:
-            points = 15
-        elif int(placed) == 2:
-            points = 20
-        elif int(placed) == 1:
-            points = 25
-        return points
