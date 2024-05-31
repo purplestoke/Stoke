@@ -1,6 +1,3 @@
 # Stoke
 A Discord bot which hosts online gaming tournaments using Ethereum 
-
-#DISCLAIMER 
-FAIRLY NEW TO PROGRAMMING AND GITHUB, I DONT KNOW WHAT I'M DOING WITH BRANCHES AND PULL REQUESTS RIGHT NOW
-APOLOGIES IF THE REPO IS A BIT CONFUSING
+See website linked in this repo for more info https://thebugshub.com
