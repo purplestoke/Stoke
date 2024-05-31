@@ -1,0 +1,7 @@
+Time: 05/25/2024 10:21 | bugsId: 1 | guildId: 1 | file: xdef_sc/1/xdefSc1.jpg| Flags: []
+Time: 05/25/2024 10:23 | bugsId: 1 | guildId: 1 | file: xdef_sc/1/xdefSc1.jpg| Flags: []
+Time: 05/25/2024 10:24 | bugsId: 1 | guildId: 1 | file: xdef_sc/1/xdefSc1.jpg| Flags: []
+Time: 05/25/2024 10:30 | bugsId: 1 | guildId: 1 | file: xdef_sc/1/xdefSc1.jpg| Flags: []
+Time: 05/25/2024 10:34 | bugsId: 1 | guildId: 1 | file: xdef_sc/1/xdefSc1.jpg| Flags: []
+Time: 05/27/2024 10:26 | bugsId: 1 | guildId: 1 | file: xdef_sc/1/xdefSc1.jpg| Flags: []
+Time: 05/27/2024 10:28 | bugsId: 1 | guildId: 1 | file: xdef_sc/1/xdefSc1.jpg| Flags: []

@@ -1,0 +1,18 @@
+ pullBugsServ = cur.execute('SELECT guild FROM Stoke_Guilds WHERE guild_id = 1')
+                bugsServId = int(pullBugsServ.fetchone()[0])
+                if bugsServId == self.guildId:
+                    # PULL CHANNELS AS NEEDED
+                    # PULLPLAYER PROFILE CHANNEL BASED ON GUILD
+                    if self.find == "buggin":
+                        pull = cur.execute(
+                            "SELECT bugs_channel FROM Stoke_Guilds WHERE guild_id = 1")
+                        ret = int(pull.fetchone()[0])
+                        return 2, ret
+
+                    # PULL SC SUBMISSION CHANNEL BASED ON GUILD
+                    elif self.find == "scSubmission":
+                            pull = cur.execute(
+                                "SELECT sc_submission FROM Stoke_Guilds WHERE guild = ?", (self.guildId,)
+                            )
+                            ret = int(pull.fetchone()[0])
+                            return 2, ret
