@@ -1,0 +1,88 @@
+Overview:
+  Stoke is a Discord bot capable of hosting online gaminng events using the Ethereum blockchain. The bot merely quereies the blockchain for 
+  transactions of certain values made to specific wallets. There is no use of NFT's nor tokens. Stoke uses the Etherscan API in order to view
+  Eth transactions, and manages an SQLite3 database which holds public user information such as, Discord id's, Eth adresses, gamertags.
+
+  The bot utlizes a Python Class Object called Stoke(). The class contains nested classes which are organized based on their operating theme.
+  These classes are used within the Cogs of the Stoke bot in order to avoid replication of code and allow for ease of changes and updates to be
+  made to Stoke's capabilities. 
+
+The Stoke Class:
+  A Stoke class is initiated by creating a stokeIns var such as: stokeIns = Stoke(). The Stoke class does not require any args but the sub-classes
+  nested within do.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bugsProfile() subclass 
+  bugsProfileIns = stokeIns.bugsProfile()
+    args:
+      discordId
+      EthAddress
+
+  The bugs Profile subclass is used in order to create, delete, update or retrieve a bugs Profile. It also has the ability to check if a Discord user has a bugs Profile
+  or pull a users bugsProfile id from the database. Discord Id is always passed at object creation, EthAddress is only passed when creating/updating a bugs Profile.
+
+  bugsProfile Methods: -----------------------------------
+
+  .hasProfile() -----
+    args:
+      self
+
+    This method returns a 2 if the discord Id passed in the constructor has a bugs profile associated with it found in the database. This method does not take any arguments, it uses the variables passed
+      at object creation. If no bugs Profile is found the method returns a 1.
+
+  .create() -----
+    args:
+      self
+
+    This method creates a bugs Profile using the vars passed at object creation. First the block numbers for the day are pulled from the blocks class. Then an Etherscan API call is made
+      using the Eth Address passed through the constructor. A list of transactions within the specified block numbers is returned by Etherscan. We then iterate through those transactions looking
+      for a to address of the bugs Treasury wallet and a value of 0.003 Ethereum. If found we add the users Discord Id and Eth address to the bugs Profile table in the database, along with the transaction hash. 
+
+    Lastly Stoke pulls the new users bugs Id from the bugs Profile table and creates a row for the user in each Player Profile table, inserting their bugs Id as a placeholder. Once completed succesfully a 2 is returned.
+      If a 5 is returned the Eth address is already in the database, a 6 means an error occured when making the API call. 
+
+  .delete() -----
+    args:
+      self
+
+    This method deletes a users bugs Profile and all Player Profiles associated. Using the vars passed at object creation. First the method pulls the guild Ids for which each Player Profile was created in.
+      Then pulls the role Id for the game associated. The method returns a 2 and the role List so that Stoke can effectively remove the roles for the Discord user in each Guild the user may have created a 
+      Player Profile. If at any point the method fails, a 3 and None is returned.
+
+  .retrieve() -----
+    args:
+      self
+
+    This method queries the database for the Ethereum address associated with a bugs Profile. Using the Discord Id var passed at object creation. The method returns a 2 and the address at success. If
+      the method fails it returns a 3 and None. 
+
+  .update() -----
+    args:
+      self
+
+    This method pulls the Eth block numbers from the blocks class and makes an Etherscan API call for a transaction list withint the block range for the address passed at object creation. It then iterates
+      through that list looking for a transaction to the bugs Treasury wallet with a value of the Update Profile Fee (currently 0.003 Eth 7/15/24). If found the method Updates the users address and hash field with
+      the new information, using the users Discord Id and returns a 2, if a 5 is returned it means the updated address is already in the database and a 6 returned means the API call failed. 
+
+  .bugsId() -----
+    args:
+      self
+
+    This method pulls a users bugs Id from the bugs Profile table using their Discord Id passed at object creation. If found the method returns a 2 and the id, if a 4 is returned it means that the Discord user does
+      not have a bugs Profile. If a 3 is returned it means something occurred which stopped the SQL query. 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Guilds() Subclass
+guildIns = stokeIns.Guilds()
+  args:
+    find
+    guildId 
+
+The Guilds subclass is used to pull Discord server information such as Guild ids from the database, a Guild's Discord Id, the roles created by Stoke and a guilds overall score in a bugs event. Along with
+  the name of the Guild. 
+
+Guilds() Methods -----------------------------------
+
+
+  
+
